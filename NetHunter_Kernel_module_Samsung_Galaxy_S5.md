@@ -112,13 +112,19 @@ Realtek RTL88x2BU Wireless Lan Driver for Linux
 git clone https://github.com/ivanovborislav/rtl88x2bu.git
 ```
 
+Realtek RTL8821AU Wireless Lan Driver for Linux
+
+```
+git clone https://github.com/ivanovborislav/rtl8821au.git
+```
+
 Edit:
 
-`Makefile` (rtl8188eu/Ln143), (rtl88x2bu/Ln140) - `CONFIG_PLATFORM_I386_PC = y` to `CONFIG_PLATFORM_I386_PC = n`
+`Makefile` (rtl8188eu/Ln143), (rtl88x2bu/Ln140), (rtl8821au/Ln140) - `CONFIG_PLATFORM_I386_PC = y` to `CONFIG_PLATFORM_I386_PC = n`
 
-`Makefile` add line below (rtl8188eu/Ln143), (rtl88x2bu/Ln140) - `CONFIG_PLATFORM_ANDROID_ARM = y`
+`Makefile` add line below (rtl8188eu/Ln143), (rtl88x2bu/Ln140), (rtl8821au/Ln140) - `CONFIG_PLATFORM_ANDROID_ARM = y`
 
-`Makefile` add lines below (rtl8188eu/Ln1358), (rtl88x2bu/Ln1346) - 
+`Makefile` add lines below (rtl8188eu/Ln1358), (rtl88x2bu/Ln1346), (rtl8821au/Ln1346) - 
 
 ```
 
@@ -144,11 +150,11 @@ Run:
 make
 ```
 
-Now we have kernel module `8188eu.ko`, (`88x2bu.ko`).
+Now we have kernel module `8188eu.ko`, `(88x2bu.ko)`, `(8821au.ko)`.
 
-Make a folder and subfolder `/modules/3.4.0-nethunter-klte-eur-1.4` and copy `8188eu.ko`, (`88x2bu.ko`) to `/modules/3.4.0-nethunter-klte-eur-1.4/`.
+Make a folder and subfolder `/modules/3.4.0-nethunter-klte-eur-1.4` and copy `8188eu.ko`, `(88x2bu.ko)`, `(8821au.ko)` to `/modules/3.4.0-nethunter-klte-eur-1.4/`.
 
-Drag and drop `zImage`, folder, subfolder and file(s) `/modules/3.4.0-nethunter-klte-eur-1.4/8188eu.ko`, (`88x2bu.ko`) to `kernel-nethunter-klte-touchwiz-marshmallow-2017.11-18-1618.zip` (for example).
+Drag and drop `zImage`, folder, subfolder and file(s) `/modules/3.4.0-nethunter-klte-eur-1.4/8188eu.ko`, `(88x2bu.ko)`, `(8821au.ko)` to `kernel-nethunter-klte-touchwiz-marshmallow-2017.11-18-1618.zip` (for example).
 
 Now we have NetHunter image (zip file) with own kernel and kernel module(s).
 
