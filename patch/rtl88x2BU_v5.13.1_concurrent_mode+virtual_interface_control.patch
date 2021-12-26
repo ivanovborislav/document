@@ -1,0 +1,33 @@
+diff -Naur /Makefile /Makefile
+--- /Makefile	2021-12-24 03:32:50.413094000 -0500
++++ /Makefile	2021-12-26 04:31:52.623029000 -0500
+@@ -1332,6 +1332,7 @@
+ endif
+ 
+ ifeq ($(CONFIG_PLATFORM_I386_PC), y)
++EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
+ EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
+ EXTRA_CFLAGS += -DCONFIG_IOCTL_CFG80211 -DRTW_USE_CFG80211_STA_EVENT
+ 
+diff -Naur /os_dep/linux/os_intfs.c /os_dep/linux/os_intfs.c
+--- /os_dep/linux/os_intfs.c	2021-12-24 03:32:50.649094000 -0500
++++ /os_dep/linux/os_intfs.c	2021-12-26 04:38:29.491029000 -0500
+@@ -507,12 +507,18 @@
+ 
+ #ifdef CONFIG_CONCURRENT_MODE
+ 
++/*
+ 	#if (CONFIG_IFACE_NUMBER > 2)
+ 		int rtw_virtual_iface_num = CONFIG_IFACE_NUMBER - 1;
+ 		module_param(rtw_virtual_iface_num, int, 0644);
+ 	#else
+ 		int rtw_virtual_iface_num = 1;
+ 	#endif
++*/
++
++		int rtw_virtual_iface_num = 0;
++		module_param(rtw_virtual_iface_num, int, 0644);
++		MODULE_PARM_DESC(rtw_virtual_iface_num,"virtual interface, 0:disable, 1:enable");
+ 
+ #ifdef CONFIG_P2P
+ 
