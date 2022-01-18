@@ -124,7 +124,7 @@ Edit:
 
 `Makefile` add line below (rtl8188eu/Ln143), (rtl88x2bu/Ln140), (rtl8821au/Ln140) - `CONFIG_PLATFORM_ANDROID_ARM = y`
 
-`Makefile` add lines below (rtl8188eu/Ln1358), (rtl88x2bu/Ln1346), (rtl8821au/Ln1346) - 
+`Makefile` add lines below (rtl8188eu/Ln1358), (rtl88x2bu/Ln1348), (rtl8821au/Ln1346) - 
 
 ```
 
