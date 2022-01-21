@@ -20197,7 +20197,15 @@ diff -Naur /Makefile /Makefile
 diff -Naur /os_dep/linux/usb_intf.c /os_dep/linux/usb_intf.c
 --- /os_dep/linux/usb_intf.c	2022-01-21 10:50:56.182185000 -0500
 +++ /os_dep/linux/usb_intf.c	2022-01-21 11:10:11.910203719 -0500
-@@ -211,6 +211,27 @@
+@@ -204,6 +204,7 @@
+ 	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0x0823, 0xff, 0xff, 0xff), .driver_info = RTL8821}, /* 8821AU */
+ 	/*=== Customer ID ===*/
+ 	{USB_DEVICE(0x7392, 0xA811), .driver_info = RTL8821}, /* Edimax - Edimax */
++	{USB_DEVICE(0x7392, 0xA812), .driver_info = RTL8821}, /* Edimax - Edimax */
+ 	{USB_DEVICE(0x04BB, 0x0953), .driver_info = RTL8821}, /* I-O DATA - Edimax */
+ 	{USB_DEVICE(0x2001, 0x3314), .driver_info = RTL8821}, /* D-Link - Cameo */
+ 	{USB_DEVICE(0x2001, 0x3318), .driver_info = RTL8821}, /* D-Link - Cameo */
+@@ -211,6 +212,27 @@
  	{USB_DEVICE(0x056E, 0x400E) , .driver_info = RTL8821}, /* ELECOM -  ELECOM */
  	{USB_DEVICE(0x056E, 0x400F) , .driver_info = RTL8821}, /* ELECOM -  ELECOM */
  	{USB_DEVICE(0x20f4, 0x804b), .driver_info = RTL8821}, /* TRENDnet  */
