@@ -1,0 +1,90 @@
+diff -Naur /hal/hal_hci/hal_usb.c /hal/hal_hci/hal_usb.c
+--- /hal/hal_hci/hal_usb.c	2022-02-26 20:24:24.985198000 +0200
++++ /hal/hal_hci/hal_usb.c	2022-02-26 20:51:37.219915000 +0200
+@@ -26,7 +26,11 @@
+ 
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&precvpriv->recv_tasklet,
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0)
+ 		     (void(*)(unsigned long))usb_recv_tasklet,
++#else
++		     (void *)usb_recv_tasklet,
++#endif
+ 		     (unsigned long)padapter);
+ #endif /* PLATFORM_LINUX */
+ 
+diff -Naur /hal/rtl8188e/usb/rtl8188eu_xmit.c /hal/rtl8188e/usb/rtl8188eu_xmit.c
+--- /hal/rtl8188e/usb/rtl8188eu_xmit.c	2022-02-26 20:24:25.037197000 +0200
++++ /hal/rtl8188e/usb/rtl8188eu_xmit.c	2022-02-26 20:53:51.815068000 +0200
+@@ -25,7 +25,11 @@
+ 
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&pxmitpriv->xmit_tasklet,
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0)
+ 		     (void(*)(unsigned long))rtl8188eu_xmit_tasklet,
++#else
++		     (void *)rtl8188eu_xmit_tasklet,
++#endif
+ 		     (unsigned long)padapter);
+ #endif
+ #ifdef CONFIG_TX_EARLY_MODE
+diff -Naur /os_dep/linux/os_intfs.c /os_dep/linux/os_intfs.c
+--- /os_dep/linux/os_intfs.c	2022-02-26 20:24:25.089196000 +0200
++++ /os_dep/linux/os_intfs.c	2022-02-26 20:44:44.180574000 +0200
+@@ -1634,7 +1634,11 @@
+ 	}
+ 
+ 	_rtw_memcpy(adapter_mac_addr(padapter), sa->sa_data, ETH_ALEN); /* set mac addr to adapter */
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0)
+ 	_rtw_memcpy(pnetdev->dev_addr, sa->sa_data, ETH_ALEN); /* set mac addr to net_device */
++#else
++	dev_addr_set(pnetdev, sa->sa_data); /* set mac addr to net_device */
++#endif
+ 
+ #if 0
+ 	if (rtw_is_hw_init_completed(padapter)) {
+@@ -2170,7 +2174,11 @@
+ 	/* alloc netdev name */
+ 	rtw_init_netdev_name(ndev, name);
+ 
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0)
+ 	_rtw_memcpy(ndev->dev_addr, adapter_mac_addr(adapter), ETH_ALEN);
++#else
++	dev_addr_set(ndev, adapter_mac_addr(adapter));
++#endif
+ 
+ 	/* Tell the network stack we exist */
+ 
+diff -Naur /os_dep/linux/rtw_proc.c /os_dep/linux/rtw_proc.c
+--- /os_dep/linux/rtw_proc.c	2022-02-26 20:24:25.093196000 +0200
++++ /os_dep/linux/rtw_proc.c	2022-02-26 20:35:01.129249000 +0200
+@@ -34,10 +34,14 @@
+ #define file_inode(file) ((file)->f_dentry->d_inode)
+ #endif
+ 
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0)
+ #if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 10, 0))
+ #define PDE_DATA(inode) PDE((inode))->data
+ #define proc_get_parent_data(inode) PDE((inode))->parent->data
+ #endif
++#else
++#define PDE_DATA(inode) pde_data(inode)
++#endif
+ 
+ #if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 24))
+ #define get_proc_net proc_net
+diff -Naur /os_dep/osdep_service.c /os_dep/osdep_service.c
+--- /os_dep/osdep_service.c	2022-02-26 20:24:25.097196000 +0200
++++ /os_dep/osdep_service.c	2022-02-26 20:29:45.695141000 +0200
+@@ -1309,7 +1309,11 @@
+ inline void thread_exit(_completion *comp)
+ {
+ #ifdef PLATFORM_LINUX
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0)
+ 	complete_and_exit(comp, 0);
++#else
++	kthread_complete_and_exit(comp, 0);
++#endif
+ #endif
+ 
+ #ifdef PLATFORM_FREEBSD
