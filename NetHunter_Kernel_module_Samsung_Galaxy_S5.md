@@ -120,11 +120,11 @@ git clone https://github.com/ivanovborislav/rtl8821au.git
 
 Edit:
 
-`Makefile` (rtl8188eu/Ln143), (rtl88x2bu/Ln140), (rtl8821au/Ln140) - `CONFIG_PLATFORM_I386_PC = y` to `CONFIG_PLATFORM_I386_PC = n`
+`Makefile` (rtl8188eu/Ln145), (rtl88x2bu/Ln142), (rtl8821au/Ln142) - `CONFIG_PLATFORM_I386_PC = y` to `CONFIG_PLATFORM_I386_PC = n`
 
-`Makefile` add line below (rtl8188eu/Ln143), (rtl88x2bu/Ln140), (rtl8821au/Ln140) - `CONFIG_PLATFORM_ANDROID_ARM = y`
+`Makefile` add line below (rtl8188eu/Ln145), (rtl88x2bu/Ln142), (rtl8821au/Ln142) - `CONFIG_PLATFORM_ANDROID_ARM = y`
 
-`Makefile` add lines below (rtl8188eu/Ln1359), (rtl88x2bu/Ln1348), (rtl8821au/Ln1348) - 
+`Makefile` add lines below (rtl8188eu/Ln1361), (rtl88x2bu/Ln1350), (rtl8821au/Ln1350) - 
 
 ```
 
