@@ -20292,7 +20292,7 @@ diff -Naur /hal/rtl8812a/usb/rtl8812au_led.c /hal/rtl8812a/usb/rtl8812au_led.c
 diff -Naur /Makefile /Makefile
 --- /Makefile	2022-01-21 10:50:56.000000000 -0500
 +++ /Makefile	2022-02-12 04:27:31.873030000 -0500
-@@ -33,7 +33,7 @@
+@@ -35,7 +35,7 @@
  CONFIG_MULTIDRV = n
  CONFIG_RTL8188E = n
  CONFIG_RTL8812A = y
